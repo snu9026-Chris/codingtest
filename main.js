@@ -10,6 +10,11 @@ class LottoTicket extends HTMLElement {
         const title = document.createElement('h1');
         title.textContent = 'Lotto Number Generator';
 
+        const profileImg = document.createElement('img');
+        profileImg.src = 'person.jpg';
+        profileImg.setAttribute('class', 'profile-img');
+        profileImg.alt = 'Lucky Muse';
+
         const numbersContainer = document.createElement('div');
         numbersContainer.setAttribute('class', 'numbers');
 
@@ -38,6 +43,16 @@ class LottoTicket extends HTMLElement {
                 border-radius: 20px;
                 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
                 width: 320px;
+            }
+
+            .profile-img {
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-bottom: 20px;
+                border: 4px solid var(--color-blue);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             }
             
             h1 {
@@ -95,6 +110,7 @@ class LottoTicket extends HTMLElement {
 
         shadow.appendChild(style);
         shadow.appendChild(wrapper);
+        wrapper.appendChild(profileImg);
         wrapper.appendChild(title);
         wrapper.appendChild(numbersContainer);
         wrapper.appendChild(button);
