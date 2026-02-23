@@ -1,3 +1,27 @@
+// Theme toggle logic
+const themeToggle = document.getElementById('theme-toggle');
+const currentTheme = localStorage.getItem('theme');
+
+if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    if (currentTheme === 'dark') {
+        themeToggle.textContent = '☀️ Light Mode';
+    }
+}
+
+themeToggle.addEventListener('click', () => {
+    let theme = document.documentElement.getAttribute('data-theme');
+    if (theme === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        themeToggle.textContent = '🌙 Dark Mode';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        themeToggle.textContent = '☀️ Light Mode';
+    }
+});
+
 class LottoTicket extends HTMLElement {
     constructor() {
         super();
@@ -31,7 +55,6 @@ class LottoTicket extends HTMLElement {
                 --color-red: #f47a7a;
                 --color-gray: #b0b0b0;
                 --color-green: #82e0aa;
-                --color-text: #333;
             }
 
             .ticket {
@@ -39,10 +62,12 @@ class LottoTicket extends HTMLElement {
                 flex-direction: column;
                 align-items: center;
                 padding: 40px;
-                background: #ffffff;
+                background: var(--ticket-bg, #ffffff);
+                color: var(--text-color, #333333);
                 border-radius: 20px;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
+                box-shadow: 0 10px 30px var(--shadow-color), 0 0 0 1px var(--border-color);
                 width: 320px;
+                transition: all 0.3s ease;
             }
 
             .profile-img {
@@ -52,13 +77,13 @@ class LottoTicket extends HTMLElement {
                 object-fit: cover;
                 margin-bottom: 20px;
                 border: 4px solid var(--color-blue);
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 5px 15px var(--shadow-color);
             }
             
             h1 {
                 margin: 0 0 30px 0;
                 font-size: 1.5em;
-                color: var(--color-text);
+                color: var(--text-color, #333333);
                 font-weight: 600;
             }
 
@@ -78,7 +103,7 @@ class LottoTicket extends HTMLElement {
                 border-radius: 50%;
                 font-size: 1.5em;
                 font-weight: 600;
-                color: var(--color-text);
+                color: #333;
                 background-color: #eee;
                 border: 2px solid transparent;
                 transition: transform 0.2s ease;
